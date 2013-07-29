@@ -5,14 +5,19 @@ describe "StaticPages" do
   subject {page}
 
   #let(:base_title) { "Ruby on Rails Tutorial Sample App" }
-
+  
+  shared_examples_for "all static pages" do
+    it { should have_selector('h1', text: heading) }
+    it { should have_selector('title', text: full_title(page_title)) }
+  end
+  
   describe "Home page" do
     
     before { visit root_path }
     
-    it { should have_selector('h1', text:'Sample App') }
+    let(:heading) { 'Sample App' }
 	
-	  it { should have_selector('title', text: full_title('')) }
+	  let(:page_title) { '' }
 	
 	  it { should_not have_selector('title', text: '| Home') }
 
@@ -22,9 +27,9 @@ describe "StaticPages" do
     
     before { visit help_path }
     
-    it { should have_selector('h1', text: 'Help') }
-	
-	  it { should have_selector('title', text: full_title('Help')) }
+    let(:heading) { 'Help' }
+  
+    let(:page_title) { 'Help' }
  
   end
   
@@ -32,9 +37,9 @@ describe "StaticPages" do
     
     before { visit about_path }
     
-    it { should have_selector('h1', text: 'About') }
+    let(:heading) { 'About' }
   
-    it { should have_selector('title', text: full_title('About')) }
+    let(:page_title) { 'About' }
  
   end
   
@@ -42,9 +47,9 @@ describe "StaticPages" do
     
     before { visit contact_path }
     
-    it { should have_selector('h1', text: 'Contact') }
+    let(:heading) { 'Contact' }
   
-    it { should have_selector('title', text: full_title('Contact')) }
+    let(:page_title) { 'Contact' }
  
   end
 end
